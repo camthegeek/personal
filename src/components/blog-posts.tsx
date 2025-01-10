@@ -53,7 +53,7 @@ export function BlogPosts() {
             >
               <Card className="h-full flex flex-col bg-logo-dp border-logo-dp2">
                 <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-yellow-400">{post.title}</CardTitle>
+                  <CardTitle className="text-xl font-semibold text-logo-yellow">{post.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-white">{post.excerpt}</CardDescription>
@@ -63,7 +63,8 @@ export function BlogPosts() {
                     <a 
                       href={post.url} 
                       target="_blank" 
-                      rel="noopener noreferrer" 
+                      rel="noopener noreferrer"
+                      className="text-logo-yellow hover:text-logo-yellow-light transition-colors"
                     >
                       Read More
                     </a>

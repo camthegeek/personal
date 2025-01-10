@@ -54,7 +54,7 @@ export function Nav({ isInitialAnimationComplete }: { isInitialAnimationComplete
                   transition={{ duration: 0.5, delay: 4.4 + index * 0.1 }}
                 >
                   <Button variant="link" asChild>
-                    <Link href={item === "Home" ? "/" : `#${item.toLowerCase()}`} className="text-white hover:text-yellow-400 transition-colors">
+                    <Link href={item === "Home" ? "/" : `#${item.toLowerCase()}`} className="text-white hover:text-logo-yellow transition-colors">
                       {item}
                     </Link>
                   </Button>
@@ -81,7 +81,7 @@ export function Nav({ isInitialAnimationComplete }: { isInitialAnimationComplete
               <li key={item} className="px-4 py-2">
                 <Link 
                   href={item === "Home" ? "/" : `#${item.toLowerCase()}`}
-                  className="text-white hover:text-yellow-400 transition-colors"
+                  className="text-white hover:text-logo-yellow transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item}

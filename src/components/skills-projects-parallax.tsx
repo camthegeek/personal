@@ -30,18 +30,6 @@ const projects: Project[] = [
     name: "Project 3",
     description: "An innovative mobile application developed using React Native. Project 3 highlights my ability to create cross-platform solutions with seamless user experiences.",
     image: "/img/projx/dashboard.png"
-  },
-  {
-    name: "Project 4",
-    description: "Project 4 is a full-stack web application that leverages modern technologies like Next.js, GraphQL, and serverless functions to deliver a scalable and performant solution.",
-    image: "/img/projx/dashboard.png",
-    url: "https://project4.com"
-  },
-  {
-    name: "Project 5",
-    description: "Project 4 is a full-stack web application that leverages modern technologies like Next.js, GraphQL, and serverless functions to deliver a scalable and performant solution.",
-    image: "/img/projx/dashboard.png",
-    url: "https://project4.com"
   }
 ]
 
@@ -56,12 +44,12 @@ export function SkillsProjectsParallax() {
     <div ref={containerRef} className="min-h-screen  bg-gradient-to-b from-logo-gray via-logo-dp to-logo-dp py-20">
       <div className="container mx-auto px-4 max-w-5xl">
         <motion.h2 
-          className="text-4xl md:text-5xl font-bold text-yellow-400 mb-16 text-center"
+          className="text-4xl md:text-5xl font-bold text-logo-yellow mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Mostly, I develop things
+          Writing code is my passion
         </motion.h2>
         <motion.p 
           className="text-white text-center mb-16"
@@ -69,7 +57,7 @@ export function SkillsProjectsParallax() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2.5, delay: 0.9 }}
         >
-          like . . .
+          And passion drives me to create amazing projects that solve real-world problems. Here are some of my recent works.
           </motion.p>
         {projects.map((project, index) => {
             let bgClass = "bg-logo-dp";
@@ -99,7 +87,7 @@ export function SkillsProjectsParallax() {
               </div>
               <CardContent className={`w-full md:w-1/3 p-6 flex flex-col justify-center ${bgClass}`}>
                 <CardHeader>
-                  <CardTitle className="text-xl md:text-2xl font-bold text-yellow-400">{project.name}</CardTitle>
+                  <CardTitle className="text-xl md:text-2xl font-bold text-logo-yellow">{project.name}</CardTitle>
                 </CardHeader>
                 <CardDescription className="text-white text-sm md:text-base mb-4">{project.description}</CardDescription>
                 {project.url && (

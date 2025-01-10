@@ -17,8 +17,8 @@ export function ParallaxText() {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="w-1/3 text-right pr-4 flex flex-col items-end">
           <div className="translate-y-[-1.25rem]">
-            <h3 className="text-3xl font-medium text-yellow-300/80 mb-2">hey,</h3>
-            <h2 className="text-6xl font-bold text-yellow-400">i'm</h2>
+            <h3 className="text-3xl font-medium text-logo-yellow mb-2">hey,</h3>
+            <h2 className="text-6xl font-bold text-logo-yellow">i'm</h2>
           </div>
         </div>
         <div className="w-2/3 h-screen flex flex-col justify-center relative pl-4">
