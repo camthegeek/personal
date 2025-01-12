@@ -29,7 +29,7 @@ export function InteractiveQuote() {
           transition={{ duration: 0.5 }}
           className="mb-4"
         >
-          <p className="text-logo-yellow text-xl italic">"{quotes[currentQuote]}"</p>
+          <p className="text-logo-yellow text-xl italic">&quot;{quotes[currentQuote]}&quot;</p>
         </motion.div>
       </AnimatePresence>
       <button

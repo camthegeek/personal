@@ -1,10 +1,11 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { useRef } from 'react'
 import Image from 'next/image'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
 
 type Project = {
   name: string
@@ -15,10 +16,10 @@ type Project = {
 
 const projects: Project[] = [
   {
-    name: "Project 1",
-    description: "A brief description of Project 1 and its key features. This project showcases my skills in web development and user interface design.",
+    name: "Colony Watch",
+    description: "Designed to aggregate stats for a specific product, this project expanded into a full solution to monitor Bitcoin mining farms, providing comprehensive control and real-time insights.",
     image: "/img/projx/dashboard.png",
-    url: "https://project1.com"
+    url: "https://colonywatch.com"
   },
   {
     name: "Project 2",
@@ -35,12 +36,9 @@ const projects: Project[] = [
 
 export function SkillsProjectsParallax() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
-
+ 
   return (
+    <ParallaxProvider>
     <div ref={containerRef} className="min-h-screen  bg-gradient-to-b from-logo-gray via-logo-dp to-logo-dp py-20">
       <div className="container mx-auto px-4 max-w-5xl">
         <motion.h2 
@@ -67,14 +65,12 @@ export function SkillsProjectsParallax() {
               bgClass = "bg-logo-gray";
             }
          return (
-         <motion.div
-            key={project.name}
-            className="mb-20 md:mb-40"
-            style={{
-              opacity: useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]),
-              y: useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -50])
-            }}
-          >
+          <Parallax
+          key={project.name}
+          translateY={[`${(index + 1) * 50}px`, `${-(index + 1) * 50}px`]}
+          opacity={[0.5, 1]}
+          className="mb-10 md:mb-10"
+        >
             <Card className={`flex flex-col md:flex-row w-full overflow-hidden ${bgClass} border-logo-dp2`}>
               <div className="w-full md:w-2/3 relative">
                 <Image 
@@ -105,10 +101,11 @@ export function SkillsProjectsParallax() {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </Parallax>
         )})}
       </div>
     </div>
+    </ParallaxProvider>
   )
 }
 

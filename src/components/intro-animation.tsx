@@ -37,7 +37,7 @@ export function IntroAnimation({ onComplete }: { onComplete: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-b"
+      className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-b z-50"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: 4.2 }}

@@ -1,9 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { TimelineComponent } from '@/components/about/timeline-component'
-import { SkillBubbles } from '@/components/about/skill-bubbles'
 import { InteractiveQuote } from '@/components/about/interactive-quote'
 import { FunFactsCard } from '@/components/about/fun-facts-card'
 
@@ -28,7 +26,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Hey there! I'm Cameron, but you can call me Cam. I'm a 36-year-old father of three with a passion for web development, technology, and creative problem-solving. My journey in the digital world started as a hobby in my youth and has since blossomed into a fulfilling career spanning over a decade.
+            Hey there! I&apos;m Cameron, but you can call me Cam. I&apos;m a 36-year-old father of three with a passion for web development, technology, and creative problem-solving. My journey in the digital world started as a hobby in my youth and has since blossomed into a fulfilling career spanning over a decade.
           </motion.p>
         </div>
 
@@ -61,7 +59,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-logo-yellow mb-6">Personal Life</h2>
           <div className="bg-logo-dp2 rounded-lg p-6 shadow-lg">
             <p className="text-white text-lg mb-4">
-              Beyond the world of coding and development, I'm a proud father of three amazing kids. They're my inspiration and the reason I strive for excellence in everything I do. Balancing work and family life teaches invaluable lessons in time management, patience, and the importance of continuous learning.
+              Beyond the world of coding and development, I&apos;m a proud father of three amazing kids. They&apos;re my inspiration and the reason I strive for excellence in everything I do. Balancing work and family life teaches invaluable lessons in time management, patience, and the importance of continuous learning.
             </p>
             <InteractiveQuote />
           </div>

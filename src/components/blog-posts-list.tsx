@@ -68,6 +68,7 @@ export function BlogPostsList({ postType }: { postType: PostType }) {
         const data = await response.json()
         setPosts(data.data)
       } catch (err) {
+        console.error(err)
         setError('Failed to load blog posts. Please try again later.')
       } finally {
         setIsLoading(false)

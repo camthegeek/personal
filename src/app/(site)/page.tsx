@@ -7,8 +7,7 @@ import { Nav } from "@/components/nav"
 import { ParallaxText } from "@/components/parallax-text"
 import { SkillsProjectsParallax } from "@/components/skills-projects-parallax"
 import { BlogPosts } from "@/components/blog-posts"
-import { Footer } from "@/components/footer"
-import { BlogPostsProvider } from "@/contexts/blog";
+import { BlogPostsProvider } from "@/contexts/blog"
 import Cookies from 'js-cookie'
 
 export default function Home() {
@@ -31,29 +30,32 @@ export default function Home() {
   }, [isIntroComplete])
 
   return (
-    <main className="relative">
+    <div className="flex flex-col min-h-screen">
+      <Nav />
       <AnimatePresence>
         {!isIntroComplete && (
           <IntroAnimation onComplete={() => setIsIntroComplete(true)} />
         )}
       </AnimatePresence>
-
       <AnimatePresence>
         {showContent && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            className="flex-grow"
           >
-            <ParallaxText />
-            <SkillsProjectsParallax />
-            <BlogPostsProvider>
-              <BlogPosts />
-            </BlogPostsProvider>
+            <main>
+              <ParallaxText />
+              <SkillsProjectsParallax />
+              <BlogPostsProvider>
+                <BlogPosts />
+              </BlogPostsProvider>
+            </main>
           </motion.div>
         )}
       </AnimatePresence>
-    </main>
+    </div>
   )
 }
 

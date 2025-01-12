@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import type { Post, PostsResponse, PostType } from '@/types/blog'
 
 type BlogPostsContextType = {
@@ -49,7 +49,7 @@ export function BlogPostsProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const fetchAllPosts = async () => {
+  const fetchAllPosts = useCallback(async () => {
     setIsLoading(true)
     try {
       const [howTos, opinions] = await Promise.all([
@@ -66,14 +66,14 @@ export function BlogPostsProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchAllPosts()
     // Fetch posts every 5 minutes
     const interval = setInterval(fetchAllPosts, 5 * 60 * 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, [fetchAllPosts])
 
   return (
     <BlogPostsContext.Provider value={{ posts, isLoading, error }}>

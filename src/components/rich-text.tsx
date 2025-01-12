@@ -2,8 +2,8 @@ import React from 'react'
 import { RichTextBlock, RichTextChild } from '@/types/blog'
 
 export function RichTextRenderer({ content }: { content: RichTextBlock[] }) {
-  const renderChild = (child: RichTextChild, index: number) => {
-    let text = child.text
+  const renderChild = (child: RichTextChild, index: number): React.ReactNode => {
+    let text: React.ReactNode = child.text
 
     if (child.bold) {
       text = <strong key={index}>{text}</strong>
