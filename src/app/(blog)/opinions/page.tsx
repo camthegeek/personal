@@ -3,7 +3,7 @@ import { BlogPostsList } from '@/components/blog-posts-list'
 
 export const metadata: Metadata = {
   title: 'Opinions | camthegeek',
-  description: 'Read my thoughts and opinions on various topics in web development, technology, and the tech industry.',
+  description: 'Read my thoughts and opinions on various topics including web development, relationships, travel and other tech!',
 }
 
 export default function OpinionsPage() {

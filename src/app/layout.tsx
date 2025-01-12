@@ -4,8 +4,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Developer Portfolio",
-  description: "Full-stack developer specializing in web applications and e-commerce solutions",
+  title: "camthegeek | Cameron Chadwell | geek. dev. crypto.",
+  description: "camthegeek (Cameron Chadwell) is a software engineer, web developer, and blockchain enthusiast.",
 }
 
 export default function RootLayout({

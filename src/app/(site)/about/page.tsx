@@ -4,6 +4,13 @@ import { motion } from 'framer-motion'
 import { TimelineComponent } from '@/components/about/timeline-component'
 import { InteractiveQuote } from '@/components/about/interactive-quote'
 import { FunFactsCard } from '@/components/about/fun-facts-card'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Me | camthegeek',
+  description: 'Learn more about Cameron, a web developer with a passion for technology and creative problem-solving.',
+}
+
 
 export default function AboutPage() {
   return (
