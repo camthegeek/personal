@@ -16,7 +16,7 @@ export function PostView({ post }: { post: Post }) {
           />
         </div>
       ) : null}
-      <div className="relative z-10 min-h-screen bg-gradient-to-b from-logo-dp/90 to-logo-gray/90 backdrop-blur-sm">
+      <div className="relative z-10 min-h-screen bg-gradient-to-b from-logo-dp/90 to-logo-gray/90 backdrop-blur-sm py-10">
         <div className="max-w-3xl mx-auto px-4 py-4">
           <h1 className="text-4xl md:text-5xl font-bold text-logo-yellow mb-4">{post.title}</h1>
           <div className="text-white/80 mb-8">

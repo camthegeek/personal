@@ -5,8 +5,11 @@ import { Post } from '@/types/blog'
 type Props = Promise<{ params: { slug: string } }>
 
 export async function generateMetadata(props: { params: Props}) : Promise<Metadata> {
-  const params = await props.params
-  const post = await getPost(params.params.slug)
+  const params = await props.params;
+  const { slug } = JSON.parse(JSON.stringify(params));
+
+  const post = await getPost(slug);
+  
   return {
     title: `${post.title} | How-To Guide`,
     description: post.post[0].children[0].text.slice(0, 160),
@@ -28,7 +31,7 @@ async function getPost(slug: string): Promise<Post> {
 
 export default async function HowToPage(props: { params: Props }) {
   const params = await props.params;
-  const slug = params.params.slug;
+  const { slug } = JSON.parse(JSON.stringify(params));
   const post = await getPost(slug);
 
   return <PostView post={post} />
