@@ -8,10 +8,20 @@ import { ParallaxText } from "@/components/parallax-text"
 import { SkillsProjectsParallax } from "@/components/skills-projects-parallax"
 import { BlogPosts } from "@/components/blog-posts"
 import { Footer } from "@/components/footer"
+import { BlogPostsProvider } from "@/contexts/blog";
+import Cookies from 'js-cookie'
 
 export default function Home() {
   const [isIntroComplete, setIsIntroComplete] = useState(false)
   const [showContent, setShowContent] = useState(false)
+
+  useEffect(() => {
+    const skipIntro = Cookies.get('skipIntro')
+    if (skipIntro === 'true') {
+      setIsIntroComplete(true)
+      setShowContent(true)
+    }
+  }, [])
 
   useEffect(() => {
     if (isIntroComplete) {
@@ -27,7 +37,7 @@ export default function Home() {
           <IntroAnimation onComplete={() => setIsIntroComplete(true)} />
         )}
       </AnimatePresence>
-      <Nav isInitialAnimationComplete={isIntroComplete} />
+
       <AnimatePresence>
         {showContent && (
           <motion.div
@@ -37,8 +47,9 @@ export default function Home() {
           >
             <ParallaxText />
             <SkillsProjectsParallax />
-            <BlogPosts />
-            <Footer />
+            <BlogPostsProvider>
+              <BlogPosts />
+            </BlogPostsProvider>
           </motion.div>
         )}
       </AnimatePresence>

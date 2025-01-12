@@ -1,33 +1,75 @@
-import { Facebook, DiscIcon as Discord, Twitter, Github } from 'lucide-react'
+'use client';
+
 import Link from 'next/link'
+import { navItems } from '@/lib/navigation'
+import { SocialIcon } from 'react-social-icons'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { useState } from 'react'
+
+// Define the social icons data
+const socialIcons = [
+  { network: 'facebook', url: 'https://facebook.com/camchadwell' },
+  { network: 'discord', url: '#', tooltip: '@camthegeek on Discord (Add as friend)' },
+  { network: 'x', url: 'https://x.com/camthegeek' },
+  { network: 'github', url: 'https://github.com/camthegeek' },
+  // Add more social icons here as needed
+]
 
 export function Footer() {
+  const [hoverStates, setHoverStates] = useState<Record<string, boolean>>(
+    Object.fromEntries(socialIcons.map(icon => [icon.network, false]))
+  )
+
+  const handleMouseEnter = (network: string) => {
+    setHoverStates(prev => ({ ...prev, [network]: true }))
+  }
+
+  const handleMouseLeave = (network: string) => {
+    setHoverStates(prev => ({ ...prev, [network]: false }))
+  }
+
   return (
     <footer className="bg-logo-dp text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Connect with me</h3>
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-yellow-400"><Facebook size={24} /></a>
-              <a href="#" className="hover:text-yellow-400"><Discord size={24} /></a>
-              <a href="#" className="hover:text-yellow-400"><Twitter size={24} /></a>
-              <a href="#" className="hover:text-yellow-400"><Github size={24} /></a>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Site Map</h3>
-            <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-yellow-400">Home</Link></li>
-              <li><Link href="#about" className="hover:text-yellow-400">About</Link></li>
-              <li><Link href="#projects" className="hover:text-yellow-400">Projects</Link></li>
-              <li><Link href="#skills" className="hover:text-yellow-400">Skills</Link></li>
-              <li><Link href="#contact" className="hover:text-yellow-400">Contact</Link></li>
+        <div className="flex flex-col items-center">
+          <nav className="mb-8">
+            <ul className="flex flex-wrap justify-center gap-4">
+              {navItems.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-logo-yellow font-bold hover:text-logo-yellow transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
+          </nav>
+          <div className="flex space-x-6 mb-8">
+            {socialIcons.map((icon) => (
+              <TooltipProvider key={icon.network}>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <SocialIcon 
+                      url={icon.url}
+                      network={icon.network}
+                      bgColor="transparent"
+                      fgColor={hoverStates[icon.network] ? "rgb(236, 227, 40)" : "white"}
+                      style={{ cursor: 'pointer' }}
+                      onMouseEnter={() => handleMouseEnter(icon.network)}
+                      onMouseLeave={() => handleMouseLeave(icon.network)}
+                    />
+                  </TooltipTrigger>
+                  {icon.tooltip && (
+                    <TooltipContent side="top">
+                      <p>{icon.tooltip}</p>
+                    </TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+            ))}
           </div>
-        </div>
-        <div className="mt-8 text-center">
-          <p>&copy; 2023 camthegeek. All rights reserved.</p>
+          <div className="text-center">
+            <p>&copy; {new Date().getFullYear()} camthegeek. All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>
