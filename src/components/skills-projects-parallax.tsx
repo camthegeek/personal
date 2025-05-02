@@ -15,23 +15,24 @@ type Project = {
 }
 
 const projects: Project[] = [
+
+  {
+    name: "Juk.gg Gaming Clips",
+    description: "A platform for sharing and discovering gaming clips, Juk.gg showcases my expertise in building scalable web applications with a focus on user engagement, revenue generation, AI integrations and community features.", 
+    image: "/img/projx/jukalpha.png",
+    url: "https://juk.gg"
+  },
+  {
+    name: "State Park Explorer",
+    description: "A web application designed to help users discover and explore state parks across the United States, featuring detailed information, community engagement, and premium features including personalized recommendations, and advanced search filters as well as a subscription model for businesses looking for park data.",
+    image: "/img/projx/parks.png"
+  },
   {
     name: "Colony Watch",
     description: "Designed to aggregate stats for a specific product, this project expanded into a full solution to monitor Bitcoin mining farms, providing comprehensive control and real-time insights.",
     image: "/img/projx/dashboard.png",
     url: "https://colonywatch.com"
   },
-  {
-    name: "Project 2",
-    description: "Project 2 demonstrates my expertise in backend development and database management. It includes complex data processing and API integrations.",
-    image: "/img/projx/dashboard.png",
-    url: "https://project2.com"
-  },
-  {
-    name: "Project 3",
-    description: "An innovative mobile application developed using React Native. Project 3 highlights my ability to create cross-platform solutions with seamless user experiences.",
-    image: "/img/projx/dashboard.png"
-  }
 ]
 
 export function SkillsProjectsParallax() {
@@ -77,8 +78,8 @@ export function SkillsProjectsParallax() {
                   src={project.image} 
                   alt={project.name} 
                   width={600} 
-                  height={400} 
-                  className="object-cover w-full h-64 md:h-full"
+                  height={400}
+                  className="object-contain w-full h-64 md:h-auto"
                 />
               </div>
               <CardContent className={`w-full md:w-1/3 p-6 flex flex-col justify-center ${bgClass}`}>
@@ -86,7 +87,7 @@ export function SkillsProjectsParallax() {
                   <CardTitle className="text-xl md:text-2xl font-bold text-logo-yellow">{project.name}</CardTitle>
                 </CardHeader>
                 <CardDescription className="text-white text-sm md:text-base mb-4">{project.description}</CardDescription>
-                {project.url && (
+                {project.url ? (
                   <div className="p-0">
                     <Button asChild>
                       <a 
@@ -98,7 +99,15 @@ export function SkillsProjectsParallax() {
                       </a>
                     </Button>
                   </div>
+                ) : 
+(
+                  <div className="p-0">
+                    <Button disabled>
+                      In Progress
+                    </Button>
+                  </div>
                 )}
+
               </CardContent>
             </Card>
           </Parallax>
