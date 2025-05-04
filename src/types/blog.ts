@@ -48,7 +48,7 @@ export type Post = {
   id: number
   documentId: string
   title: string
-  post: RichTextBlock[]
+  content: RichTextBlock[]
   slug: string
   createdAt: string
   updatedAt: string

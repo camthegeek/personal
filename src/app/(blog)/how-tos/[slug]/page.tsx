@@ -1,18 +1,19 @@
 import { Metadata } from 'next'
 import { PostView } from '@/components/post-view'
 import { Post } from '@/types/blog'
+import { getFirstParagraph } from '@/lib/utils'
 
 type Props = Promise<{ params: { slug: string } }>
 
 export async function generateMetadata(props: { params: Props}) : Promise<Metadata> {
   const params = await props.params;
   const { slug } = JSON.parse(JSON.stringify(params));
-
   const post = await getPost(slug);
-  
+   
+  const desc = getFirstParagraph(post.content);
   return {
     title: `${post.title} | How-To Guide`,
-    description: post.post[0].children[0].text.slice(0, 160),
+    description: desc.slice(0, 160) || 'A comprehensive guide on how to do something.',
   }
 }
 

@@ -8,8 +8,10 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Post } from '@/types/blog'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getFirstParagraph } from '@/lib/utils'
 
 function PostCard({ post, type }: { post: Post, type: 'how-to' | 'opinion' }) {
+  const firstP = getFirstParagraph(post.content);
   return (
     <Card className="h-full flex flex-col bg-logo-dp overflow-hidden">
       <div className="relative">
@@ -31,9 +33,9 @@ function PostCard({ post, type }: { post: Post, type: 'how-to' | 'opinion' }) {
           <CardTitle className="text-xl font-semibold text-yellow-400 mb-2">
             {post.title}
           </CardTitle>
-          {post.post ? (
+          {post.content ? (
           <CardDescription className="text-white/90 line-clamp-2">        
-            {post.post[0].children[0].text}...
+            {firstP}...
           </CardDescription>
           ) : null}
         </div>

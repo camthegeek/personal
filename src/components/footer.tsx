@@ -8,10 +8,10 @@ import { useState } from 'react'
 
 // Define the social icons data
 const socialIcons = [
-  { network: 'facebook', url: 'https://facebook.com/camchadwell' },
+  // { network: 'facebook', url: 'https://facebook.com/camchadwell' },
+  { network: 'github', url: 'https://github.com/camthegeek' },
   { network: 'discord', url: '#', tooltip: '@camthegeek on Discord (Add as friend)' },
   { network: 'x', url: 'https://x.com/camthegeek' },
-  { network: 'github', url: 'https://github.com/camthegeek' },
   // Add more social icons here as needed
 ]
 
