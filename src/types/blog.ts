@@ -1,4 +1,6 @@
-export type RichTextChild = {
+import type {BlocksContent}  from "@strapi/blocks-react-renderer"
+  
+  export type RichTextChild = {
   text: string
   type: string
   bold?: boolean
@@ -48,7 +50,7 @@ export type Post = {
   id: number
   documentId: string
   title: string
-  content: RichTextBlock[]
+  content: BlocksContent,
   slug: string
   createdAt: string
   updatedAt: string

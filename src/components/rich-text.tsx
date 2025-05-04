@@ -1,8 +1,8 @@
 'use client';
 import { JSX } from 'react'
-import { BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { BlocksRenderer, type BlocksContent  } from '@strapi/blocks-react-renderer'
 
-export function RichTextRenderer({ content }: { content: any }) {
+export function RichTextRenderer({ content }: { content: BlocksContent }) {
   return (
     <div className="prose prose-invert prose-lg max-w-none">
       <BlocksRenderer 

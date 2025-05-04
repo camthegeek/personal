@@ -8,15 +8,17 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Post } from '@/types/blog'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getFirstParagraph } from '@/lib/utils'
 
 type PostType = 'how-to' | 'opinion'
 
 function PostCard({ post, type }: { post: Post, type: PostType }) {
+  const excerpt = getFirstParagraph(post.content)
   return (
     <Card className="h-full flex flex-col bg-logo-dp overflow-hidden">
       <div className="relative">
         {post.cover ? (
-          <div className="relative w-full pt-[50%]">
+          <div className="relative w-full pt-[80%]">
             <Image
               src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${post.cover.formats.small.url}`}
               alt={post.cover.alternativeText || post.title}
@@ -26,20 +28,20 @@ function PostCard({ post, type }: { post: Post, type: PostType }) {
             />
           </div>
         ) : (
-          <div className="relative w-full pt-[50%] bg-logo-dp" />
+          <div className="relative w-full pt-[80%] bg-logo-dp" />
         )}
         <div className="absolute bottom-0 left-0 right-0 bg-logo-dp/90 p-4" style={{ transform: 'translateY(0%)' }}>
-          <CardTitle className="text-xl font-semibold text-yellow-400 mb-2">
+          <CardTitle className="text-2xl font-semibold text-yellow-400 mb-2">
             {post.title}
           </CardTitle>
-          {post.post ? (
-          <CardDescription className="text-white/90 line-clamp-2">        
-            {post.post[0].children[0].text}...
+          {post.content ? (
+          <CardDescription className="text-white/90 text-md line-clamp-3">        
+           {excerpt || 'No excerpt available.'}
           </CardDescription>
           ) : null}
         </div>
       </div>
-      <CardFooter className="mt-auto pt-16">
+      <CardFooter className="mt-auto pt-8">
         <Button asChild>
           <Link 
             href={`/${type}s/${post.slug}`}
