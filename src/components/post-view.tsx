@@ -4,31 +4,34 @@ import Image from 'next/image'
 
 export function PostView({ post }: { post: Post }) {
   return (
-    <article className="relative min-h-screen">
-      {post?.cover ? (
-        <div className="w-full h-full top-0 left-0 absolute">
+    <article>
+      {/* Cover image as background, not fixed */}
+      {post?.cover && (
+        <div className="relative w-full h-96 mb-8">
           <Image
             src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${post.cover.url}`}
-            alt={post.cover.alternativeText || post.title}            
+            alt={post.cover.alternativeText || post.title}
             priority
             fill
-            objectFit={`fill`}
+            className="object-cover"
           />
-        </div>
-      ) : null}
-      <div className="relative z-10 min-h-screen bg-gradient-to-b from-logo-dp/90 to-logo-gray/90 backdrop-blur-sm py-10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-logo-yellow mb-4">{post.title}</h1>
-          <div className="text-white/80 mb-8">
-            <p>Published on: {new Date(post.publishedAt).toLocaleDateString()}</p>
+          {/* Article header overlays image */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+            <div className="bg-black/60 shadow-lg max-w-7xl w-full mx-4 p-8">
+              <h1 className="text-4xl md:text-5xl font-bold text-logo-yellow mb-4 text-center">{post.title}</h1>
+              <div className="text-white/80 mb-8 text-center">
+                <p>Published on: {new Date(post.publishedAt).toLocaleDateString()}</p>
+              </div>
+            </div>
           </div>
-          {post ? 
-          <div className="prose prose-invert prose-lg max-w-none">
-            <RichTextRenderer content={post.content} />
-          </div>
-          : null}
         </div>
-      </div>
+      )}
+      {/* Main content flows after image */}
+      <main className="">
+        <div className=" bg-gradient-to-b from-logo-dp/90 to-logo-gray/90 rounded-xl p-8">
+          <RichTextRenderer content={post.content} />
+        </div>
+      </main>
     </article>
   )
 }
