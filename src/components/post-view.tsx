@@ -6,13 +6,13 @@ export function PostView({ post }: { post: Post }) {
   return (
     <article className="relative min-h-screen">
       {post?.cover ? (
-        <div className="absolute inset-0 z-0">
+        <div className="w-full h-full top-0 left-0 absolute">
           <Image
             src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${post.cover.url}`}
-            alt={post.cover.alternativeText || post.title}
-            layout="fill"
-            objectFit="cover"
+            alt={post.cover.alternativeText || post.title}            
             priority
+            fill
+            objectFit={`fill`}
           />
         </div>
       ) : null}

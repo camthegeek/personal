@@ -9,11 +9,16 @@ export async function generateMetadata(props: { params: Props}) : Promise<Metada
   const params = await props.params;
   const { slug } = JSON.parse(JSON.stringify(params));
   const post = await getPost(slug);
-   
+  if (!post) {
+    return {
+      title: 'Post Not Found | How-To Guide',
+      description: 'The requested how-to guide could not be found.',
+    }
+  }  
   const desc = getFirstParagraph(post.content);
   return {
     title: `${post.title} | How-To Guide`,
-    description: desc.slice(0, 160) || 'A comprehensive guide on how to do something.',
+    description: desc.slice(0, 160) + "..." || 'A comprehensive guide on how to do something.',
   }
 }
 
@@ -35,5 +40,8 @@ export default async function HowToPage(props: { params: Props }) {
   const { slug } = JSON.parse(JSON.stringify(params));
   const post = await getPost(slug);
 
+  if (!post) {
+    return <div className="max-w-7xl mx-auto px-4 py-10 text-center text-white">Post not found</div>
+  }
   return <PostView post={post} />
 }
