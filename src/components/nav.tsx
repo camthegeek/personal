@@ -27,8 +27,9 @@ export function Nav() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-4">
             <Image
-              src="https://avatars.githubusercontent.com/u/15266249?v=4"
-              alt="Developer Avatar"
+              src={`/logo.png`}
+              alt="camthegeek avatar surrounded by a yellow border"
+              aria-description='camthegeek avatar surrounded by a yellow border'
               width={48}
               height={48}
               className="rounded-full border-2 border-logo-yellow"
@@ -59,7 +60,7 @@ export function Nav() {
       </div>
       {isMenuOpen && (
         <motion.div 
-          className="md:hidden bg-purple-900 bg-opacity-90"
+          className="md:hidden bg-logo-dp2 bg-opacity-100"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
