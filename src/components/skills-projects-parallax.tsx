@@ -6,38 +6,12 @@ import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
-
-type Project = {
-  name: string
-  description: string
-  image: string
-  url?: string
-}
-
-const projects: Project[] = [
-
-  {
-    name: "Juk.gg Gaming Clips",
-    description: "A platform for sharing and discovering gaming clips, Juk.gg showcases my expertise in building scalable web applications with a focus on user engagement, revenue generation, AI integrations and community features.", 
-    image: "/img/projx/jukalpha.png",
-    url: "https://juk.gg"
-  },
-  {
-    name: "State Park Explorer",
-    description: "A web application designed to help users discover and explore state parks across the United States, featuring detailed information, community engagement, and premium features including personalized recommendations, and advanced search filters as well as a subscription model for businesses looking for park data.",
-    image: "/img/projx/parks.png"
-  },
-  {
-    name: "Colony Watch",
-    description: "Designed to aggregate stats for a specific product, this project expanded into a full solution to monitor Bitcoin mining farms, providing comprehensive control and real-time insights.",
-    image: "/img/projx/dashboard.png",
-    url: "https://colonywatch.com"
-  },
-]
+import { useProjects } from '@/contexts/projects'
 
 export function SkillsProjectsParallax() {
   const containerRef = useRef<HTMLDivElement>(null)
- 
+  const { featured, isLoading, error } = useProjects()
+
   return (
     <ParallaxProvider>
     <div ref={containerRef} className="min-h-screen  bg-gradient-to-b from-logo-gray via-logo-dp to-logo-dp py-20">
@@ -57,61 +31,61 @@ export function SkillsProjectsParallax() {
           transition={{ duration: 2.5, delay: 0.9 }}
         >
           And passion drives me to create amazing projects that solve real-world problems. Here are some of my recent works.
-          </motion.p>
-        {projects.map((project, index) => {
+        </motion.p>
+        {error && (
+          <div className="text-red-500 text-center mb-8">Failed to load projects. Please try again later.</div>
+        )}
+        <div className="grid grid-cols-1 gap-10">
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, index) => (
+            <Card key={index} className="h-64 bg-logo-dp animate-pulse" />
+          ))
+        ) : (
+          featured.map((project, index) => {
             let bgClass = "bg-logo-dp";
             if (index >= 2 && index <= 3) {
               bgClass = "bg-logo-dp-gray-1";
             } else if (index > 3) {
               bgClass = "bg-logo-gray";
             }
-         return (
-          <Parallax
-          key={project.name}
-          translateY={[`${(index + 1) * 50}px`, `${-(index + 1) * 50}px`]}
-          opacity={[0.5, 1]}
-          className="mb-10 md:mb-10"
-        >
-            <Card className={`flex flex-col md:flex-row w-full overflow-hidden ${bgClass} border-logo-dp2`}>
-              <div className="w-full md:w-2/3 relative">
-                <Image 
-                  src={project.image} 
-                  alt={project.name} 
-                  width={600} 
-                  height={400}
-                  className="object-contain w-full h-64 md:h-auto"
-                />
-              </div>
-              <CardContent className={`w-full md:w-1/3 p-6 flex flex-col justify-center ${bgClass}`}>
-                <CardHeader>
-                  <CardTitle className="text-xl md:text-2xl font-bold text-logo-yellow">{project.name}</CardTitle>
-                </CardHeader>
-                <CardDescription className="text-white text-sm md:text-base mb-4">{project.description}</CardDescription>
-                {project.url ? (
-                  <div className="p-0">
-                    <Button asChild>
-                      <a 
-                        href={project.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                      >
-                        View Project
-                      </a>
-                    </Button>
+            return (
+              <Parallax
+                key={project.id}
+                translateY={[`${(index + 1) * 50}px`, `${-(index + 1) * 50}px`]}
+                opacity={[0.5, 1]}
+                className="mb-10 md:mb-10"
+              >
+                <Card className={`flex flex-col md:flex-row w-full overflow-hidden ${bgClass} border-logo-dp2`}>
+                  <div className="w-full md:w-2/3 relative">
+                    {project.image?.url && (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${project.image.url}`}
+                        alt={project.image.alternativeText || project.title}
+                        width={600}
+                        height={400}
+                        className="object-contain w-full h-64 md:h-auto"
+                      />
+                    )}
                   </div>
-                ) : 
-(
-                  <div className="p-0">
-                    <Button disabled>
-                      In Progress
-                    </Button>
-                  </div>
-                )}
-
-              </CardContent>
-            </Card>
-          </Parallax>
-        )})}
+                  <CardContent className={`w-full md:w-1/3 p-6 flex flex-col justify-center ${bgClass}`}>
+                    <CardHeader>
+                      <CardTitle className="text-xl md:text-2xl font-bold text-logo-yellow">{project.title}</CardTitle>
+                    </CardHeader>
+                    <CardDescription className="text-white text-sm md:text-base mb-4">{project.summary}</CardDescription>
+                      <div className="p-0">
+                        <Button asChild>
+                          <a href={`/projects/${project.slug}`}>
+                            View Project
+                          </a>
+                        </Button>
+                      </div>
+                  </CardContent>
+                </Card>
+              </Parallax>
+            )
+          })
+        )}
+        </div>
       </div>
     </div>
     </ParallaxProvider>
