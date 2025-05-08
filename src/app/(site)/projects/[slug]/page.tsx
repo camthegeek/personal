@@ -3,8 +3,6 @@ import { Project } from "@/types/project";
 import { RichTextRenderer } from "@/components/rich-text";
 import Image from "next/image";
 import { Metadata } from "next";
-import { getFirstParagraph } from "@/lib/utils";
-
 
 export async function generateMetadata(props: { params: Props}) : Promise<Metadata> {
     const params = await props.params;

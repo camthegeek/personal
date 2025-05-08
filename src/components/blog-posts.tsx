@@ -65,7 +65,7 @@ export function BlogPosts() {
     <div className="min-h-screen bg-gradient-to-b from-logo-dp via-logo-gray to-logo-gray">
       <div className="container mx-auto px-4 py-4">
         <motion.h2 
-          className="text-5xl font-bold text-yellow-400 mb-16 text-center"
+          className="text-5xl font-bold text-logo-yellow mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

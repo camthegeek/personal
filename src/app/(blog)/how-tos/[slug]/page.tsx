@@ -41,11 +41,11 @@ export default async function HowToPage(props: { params: Props }) {
   const post = await getPost(slug);
 
   if (!post) {
-    return <div className="max-w-7xl mx-auto px-4 py-10 text-center text-white">Post not found</div>
+    return <div className="max-w-8xl mx-auto px-4 py-10 text-center text-white">Post not found</div>
   }
   return (
     <div className="min-h-screen bg-gradient-to-b from-logo-dp via-logo-gray to-logo-gray pt-10">
-      <div className="container max-w-7xl mx-auto px-4 py-8">
+      <div className="container max-w-8xl mx-auto px-4 py-8">
         <PostView post={post} />
       </div>
     </div>

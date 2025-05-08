@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function OpinionsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-logo-dp via-logo-gray to-logo-gray pt-10">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container max-w-8xl mx-auto px-4 py-8">
         <h1 className="text-4xl md:text-5xl font-bold text-logo-yellow mb-8 text-center">
           Opinions
         </h1>
