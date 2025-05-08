@@ -2,6 +2,26 @@ import { notFound } from "next/navigation";
 import { Project } from "@/types/project";
 import { RichTextRenderer } from "@/components/rich-text";
 import Image from "next/image";
+import { Metadata } from "next";
+import { getFirstParagraph } from "@/lib/utils";
+
+
+export async function generateMetadata(props: { params: Props}) : Promise<Metadata> {
+    const params = await props.params;
+    const { slug } = JSON.parse(JSON.stringify(params));
+    const post = await getProject(slug);
+    if (!post) {
+      return {
+        title: 'Post Not Found | How-To Guide',
+        description: 'The requested how-to guide could not be found.',
+      }
+    }  
+    const desc = post.summary;
+    return {
+      title: `${post.title} | Projects by camthegeek`,
+      description: desc.slice(0, 160) + "...",
+    }
+  }
 
 
 async function getProject(slug: string): Promise<Project | null> {
