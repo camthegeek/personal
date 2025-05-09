@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import ContactForm from '@/components/ContactForm';
 const RunnerGame = dynamic(() => import('@/components/RunnerGame'), { ssr: false });
+import { motion } from 'framer-motion';
 
 
 export default function GameForm() {
@@ -11,11 +12,12 @@ const [formSuccess, setFormSuccess] = useState(false);
 
 return (<>
 {!gameEnded ? (
-    <>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <h1 className="text-3xl font-bold mb-4">Contact Me — Play to Unlock!</h1>
       <RunnerGame onGameEnd={() => setGameEnded(true)} />
-    </>
+    </motion.div>
   ) : formSuccess ? (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
     <div className="w-full flex flex-col items-center justify-center">
       <h2 className="text-2xl font-bold text-logo-yellow mb-2">Thank you!</h2>
       <p className="mb-4 text-logo-yellow">Your message was sent successfully.</p>
@@ -26,6 +28,7 @@ return (<>
         Play Again
       </button>
     </div>
+    </motion.div>
   ) : (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="mb-6 text-center">

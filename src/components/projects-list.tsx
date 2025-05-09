@@ -1,8 +1,16 @@
-'use client';
+"use client";
 import { useProjects } from "@/contexts/projects";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function ProjectsList() {
   const { projects, isLoading, error } = useProjects();
@@ -14,16 +22,52 @@ export default function ProjectsList() {
           Failed to load projects. Please try again later.
         </div>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {isLoading
-          ? Array.from({ length: 6 }).map((_, i) => (
-              <Card key={i} className="h-96 bg-logo-dp animate-pulse" />
-            ))
-          : projects.map((project) => (
-              <Card
-                key={project.id}
-                className="flex flex-col overflow-hidden border border-logo-yellow/30 shadow-lg bg-logo-dp hover:scale-[1.025] hover:shadow-2xl transition-transform duration-200"
-              >
+      <motion.div
+        className="flex flex-col items-center mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.h1
+          className={`text-4xl md:text-5xl font-bold text-logo-yellow mb-8 text-center`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Projects
+        </motion.h1>
+        <motion.p
+          className={`text-white text-center mb-12`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          Explore my portfolio of projects, each showcasing different skills,
+          technologies, and creative solutions.
+        </motion.p>
+      </motion.div>
+
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Card key={i} className="h-96 bg-logo-dp animate-pulse" />
+          ))}
+        </div>
+      ) : (
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card className="flex flex-col overflow-hidden border border-logo-yellow/30 shadow-lg bg-logo-dp hover:scale-[1.025] hover:shadow-2xl transition-transform duration-200">
                 <div className="relative w-full h-48">
                   {project.image?.url && (
                     <Image
@@ -68,8 +112,10 @@ export default function ProjectsList() {
                   </Link>
                 </CardFooter>
               </Card>
-            ))}
-      </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
     </>
   );
 }

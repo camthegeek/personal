@@ -85,6 +85,16 @@ export function BlogPostsList({ postType }: { postType: PostType }) {
   }
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}>
+      <motion.h1 className="text-4xl md:text-5xl font-bold text-logo-yellow mb-8 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}>
+        {postType === 'how-to' ? 'How-To Guides' : 'Opinions'}
+        </motion.h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading ? (
         // Loading skeletons
@@ -117,6 +127,8 @@ export function BlogPostsList({ postType }: { postType: PostType }) {
         ))
       )}
     </div>
+    
+    </motion.div>
   )
 }
 
