@@ -1,3 +1,4 @@
+'use client';
 import { Post } from '@/types/blog'
 import { RichTextRenderer } from './rich-text'
 import Image from 'next/image'
